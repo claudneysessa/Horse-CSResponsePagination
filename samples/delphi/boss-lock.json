@@ -1,0 +1,54 @@
+{
+	"hash": "d41d8cd98f00b204e9800998ecf8427e",
+	"updated": "2021-05-19T03:34:44.2466542-03:00",
+	"installedModules": {
+		"github.com/hashload/horse": {
+			"name": "horse",
+			"version": "2.0.13",
+			"hash": "28b93a39981d5301bd980b7523e4406f",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/hashload/jhonson": {
+			"name": "jhonson",
+			"version": "1.1.1",
+			"hash": "29a013508df52fc97917b3adc0acdfc7",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/viniciussanchez/dataset-serialize": {
+			"name": "dataset-serialize",
+			"version": "v2.3.0",
+			"hash": "916555f057218c63d26c06a3c0bd12f4",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"https://github.com/claudneysessa/horse-csresponsepagination": {
+			"name": "horse-csresponsepagination",
+			"version": "master",
+			"hash": "cadba2ede7ffafa2bca09e175955f1e2",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"https://github.com/hashload/horse-compression": {
+			"name": "horse-compression",
+			"version": "1.1.3",
+			"hash": "c0bb85f8df79c2ef8fbf7f4ea8474340",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"https://github.com/hashload/jhonson": {
+			"name": "jhonson",
+			"version": "1.1.1",
+			"hash": "29a013508df52fc97917b3adc0acdfc7",
+			"artifacts": {},
+			"failed": false,
+			"changed": true
+		}
+	}
+}

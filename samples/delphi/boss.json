@@ -1,0 +1,15 @@
+{
+	"name": "Horse-CSResponsePagination-samples",
+	"description": "",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "./",
+	"projects": [],
+	"dependencies": {
+		"github.com/hashload/horse": "^2.0.13",
+		"github.com/hashload/jhonson": "^1.1.1",
+		"github.com/viniciussanchez/dataset-serialize": "^v2.3.0",
+		"https://github.com/claudneysessa/horse-csresponsepagination": ">0.0.0",
+		"https://github.com/hashload/horse-compression": "^1.1.3"
+	}
+}
