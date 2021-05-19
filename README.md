@@ -130,7 +130,7 @@ end.
 
 # Result on Response Headers
 
-When choosing to use pagination in the response header, CSPagination will generate some personalized information presenting the data in the response header.
+When choosing to use pagination in the response header, CSResponsePagination will generate some personalized information presenting the data in the response header.
 
 Field                | description
 :------------------- | :--------------
