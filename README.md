@@ -16,7 +16,7 @@ If you are using the Jhonson middleware, your declaration must come before the J
 
   THorse
     .Use(Compression())
-    .Use(CSPagination()) // <<-- Here!
+    .Use(CSResponsePagination()) // <<-- Here!
     .Use(Jhonson);
 
 ```
@@ -40,7 +40,7 @@ uses
   Horse,
   Horse.Compression,
   Horse.Jhonson,
-  Horse.CSPagination,
+  Horse.CSResponsePagination,
 
   System.SysUtils,
   System.JSON,
@@ -51,7 +51,7 @@ uses
 begin
   THorse
     .Use(Compression())
-    .Use(CSPagination())
+    .Use(CSResponsePagination())
     .Use(Jhonson);
 
   THorse.Get('/testeCSPagination',
@@ -74,7 +74,7 @@ end.
 ```
 # Result on JsonBody
 
-When choosing to use pagination in the result body, CSPagination will generate a customized return presenting the pagination data in the result body.
+When choosing to use pagination in the result body, CSResponsePagination will generate a customized return presenting the pagination data in the result body.
 
 Field    | description
 :------- | :--------------
@@ -106,7 +106,7 @@ Sample Code:
 begin
   THorse
     .Use(Compression())
-    .Use(CSPagination(false)) // <<-- paginateOnHeaders = false
+    .Use(CSResponsePagination(false)) // <<-- paginateOnHeaders = false
     .Use(Jhonson);
 
   THorse.Get('/testeCSPagination',
@@ -148,7 +148,7 @@ Sample Code:
 begin
   THorse
     .Use(Compression())
-    .Use(CSPagination(true)) // <<-- paginateOnHeaders = true
+    .Use(CSResponsePagination(true)) // <<-- paginateOnHeaders = true
     .Use(Jhonson);
 
   THorse.Get('/testeCSPagination',
