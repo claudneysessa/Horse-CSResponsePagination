@@ -1,4 +1,4 @@
-# Horse-CSPagination
+# Horse-CSReponsePagination
 
 Horse Server Middleware for Paging JSON Data in APIS's RESTFULL
 
