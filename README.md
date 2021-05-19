@@ -32,7 +32,7 @@ offset     | integer  | page to be displayed
 
 <br>
 
-Sample Horse server using CSPagination:
+Sample Horse server using CSResponsePagination:
 
 ```delphi
 uses
