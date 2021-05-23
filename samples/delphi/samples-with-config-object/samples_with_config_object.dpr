@@ -7,7 +7,10 @@ uses
 
   Horse,
   Horse.compression,
+
+  Horse.CSResponsePagination.Types,
   Horse.CSResponsePagination,
+
   Horse.Jhonson,
 
   System.JSON,
@@ -16,11 +19,22 @@ uses
   DataSet.Serialize,
   DBClient;
 
+var
+  Config: TPaginationConfig;
+
 begin
+
+  Config := TPaginationConfig.Create;
+  Config.paginateOnHeaders := True;
+  Config.header.count := 'X-Total-Count';
+  Config.header.page := 'X-Page-Count';
+  Config.header.limit := 'X-Page-Limit';
+  Config.header.offset := 'X-Page-Offset';
+  Config.header.size := 'X-Page-Size';
 
   THorse
     .Use(Compression())
-    .Use(CSResponsePagination(false))
+    .Use(CSResponsePagination(Config))
     .Use(Jhonson);
 
   THorse.Get('/testeCSPagination',
