@@ -186,6 +186,17 @@ var
 begin
 
   PaginationConfig := TPaginationConfig.Create;
+
+  PaginationConfig.paginateOnHeaders := False;
+  PaginationConfig.body.count := 'count';
+  PaginationConfig.body.page := 'pages';
+  PaginationConfig.body.limit := 'limit';
+  PaginationConfig.body.offset := 'offset';
+  PaginationConfig.body.size := 'size';
+  PaginationConfig.body.data := 'data';
+  
+  // ou
+
   PaginationConfig.paginateOnHeaders := True;
   PaginationConfig.header.count := 'X-Total-Count';
   PaginationConfig.header.page := 'X-Total-Pages';
