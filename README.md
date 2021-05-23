@@ -188,7 +188,7 @@ begin
   PaginationConfig := TPaginationConfig.Create;
   PaginationConfig.paginateOnHeaders := True;
   PaginationConfig.header.count := 'X-Total-Count';
-  PaginationConfig.header.page := 'X-Page-Count';
+  PaginationConfig.header.page := 'X-Total-Pages';
   PaginationConfig.header.limit := 'X-Page-Limit';
   PaginationConfig.header.offset := 'X-Page-Offset';
   PaginationConfig.header.size := 'X-Page-Size';
