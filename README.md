@@ -27,7 +27,7 @@ To enable the paging of the data, just inform the HEADER of the Requisition the 
 
 Parameter  | type     | description
 :--------- | :------- | :--------------
-limit      | integer  | number of records per page ( minimum value 5 )
+limit      | integer  | number of records per page
 offset     | integer  | page to be displayed
 
 <br>
@@ -149,6 +149,53 @@ begin
   THorse
     .Use(Compression())
     .Use(CSResponsePagination(true)) // <<-- paginateOnHeaders = true
+    .Use(Jhonson);
+
+  THorse.Get('/testeCSPagination',
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    var
+      DataSet: TClientDataSet;
+    begin
+      DataSet := TClientDataSet.Create(nil);
+      try
+        DataSet.LoadFromFile('dataSetExample.xml');
+        Res.Send<TJsonArray>(DataSet.ToJsonArray);
+      finally
+        DataSet.Free;
+      end;
+    end);
+
+  THorse.Listen(8888);
+
+end.
+```
+# Using Configuration Object
+
+If there is a need to modify the description of the response elements, there is the configuration object that can be used by including the unit [ Horse.CSResponsePagination.Types.pas ] in the API unit as shown in the example below.
+
+In this way we can change the description of both the return via Body and the return via ResponseHeaders.
+
+<br>
+
+Sample Code:
+
+```delphi
+var
+  PaginationConfig: TPaginationConfig;
+
+begin
+
+  PaginationConfig := TPaginationConfig.Create;
+  PaginationConfig.paginateOnHeaders := True;
+  PaginationConfig.header.count := 'X-Total-Count';
+  PaginationConfig.header.page := 'X-Page-Count';
+  PaginationConfig.header.limit := 'X-Page-Limit';
+  PaginationConfig.header.offset := 'X-Page-Offset';
+  PaginationConfig.header.size := 'X-Page-Size';
+
+  THorse
+    .Use(Compression())
+    .Use(CSResponsePagination(PaginationConfig))
     .Use(Jhonson);
 
   THorse.Get('/testeCSPagination',
