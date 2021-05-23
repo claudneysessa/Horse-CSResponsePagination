@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CB5F47F3-9C19-41D8-9CAF-A4EE25FE7623}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="HorseCSResponsePagination.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="samples\delphi\samples-basic\samples_basic.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="samples\delphi\samples-with-config-object\samples_with_config_object.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="HorseCSResponsePagination">
+        <MSBuild Projects="HorseCSResponsePagination.dproj"/>
+    </Target>
+    <Target Name="HorseCSResponsePagination:Clean">
+        <MSBuild Projects="HorseCSResponsePagination.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HorseCSResponsePagination:Make">
+        <MSBuild Projects="HorseCSResponsePagination.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="samples_basic">
+        <MSBuild Projects="samples\delphi\samples-basic\samples_basic.dproj"/>
+    </Target>
+    <Target Name="samples_basic:Clean">
+        <MSBuild Projects="samples\delphi\samples-basic\samples_basic.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="samples_basic:Make">
+        <MSBuild Projects="samples\delphi\samples-basic\samples_basic.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="samples_with_config_object">
+        <MSBuild Projects="samples\delphi\samples-with-config-object\samples_with_config_object.dproj"/>
+    </Target>
+    <Target Name="samples_with_config_object:Clean">
+        <MSBuild Projects="samples\delphi\samples-with-config-object\samples_with_config_object.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="samples_with_config_object:Make">
+        <MSBuild Projects="samples\delphi\samples-with-config-object\samples_with_config_object.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="HorseCSResponsePagination;samples_basic;samples_with_config_object"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="HorseCSResponsePagination:Clean;samples_basic:Clean;samples_with_config_object:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="HorseCSResponsePagination:Make;samples_basic:Make;samples_with_config_object:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
