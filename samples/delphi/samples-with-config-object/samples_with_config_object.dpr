@@ -1,4 +1,4 @@
-program Samples;
+program samples_with_config_object;
 
 {$APPTYPE CONSOLE}
 {$R *.res}

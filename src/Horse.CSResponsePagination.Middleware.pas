@@ -8,19 +8,19 @@ uses
 
   System.SysUtils,
   System.Classes,
-  System.JSON,
-  Web.HTTPApp;
+  System.JSON;
 
 procedure CSPaginationMiddleware(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 
 implementation
 
-uses Horse.CSResponsePagination;
+uses
+  Horse.CSResponsePagination.Types,
+  Horse.CSResponsePagination;
 
 procedure CSPaginationMiddleware(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
   _CSPInternalCount: Integer;
-  _CSPWebResponse: TWebResponse;
   _CSPContent: TObject;
   _CSPOriginalJsonArray: TJSONArray;
   _CSPNewJsonArray: TJSONArray;
@@ -39,7 +39,7 @@ begin
     if ( THorseHackResponse(Res).GetContent is TJSONArray ) then
     begin
 
-      if ( Req.Headers['limit'] <> '' ) then
+      if ( ( Req.Headers['limit'] <> '' ) or ( Req.Headers['offset'] <> '' ) ) then
       begin
 
         try
@@ -54,7 +54,7 @@ begin
           _CSPOffset :=  1;
         end;
 
-        _CSPWebResponse := THorseHackResponse(Res).GetWebResponse;
+//        _CSPWebResponse := THorseHackResponse(Res).GetWebResponse;
         _CSPContent := THorseHackResponse(Res).GetContent;
 
         if Assigned(_CSPContent) and _CSPContent.InheritsFrom( TJSONValue ) then
@@ -81,7 +81,7 @@ begin
                 _CSPNewJsonArray.AddElement(_CSPOriginalJsonArray.Items[_CSPInternalCount].Clone as TJSONValue);
             end;
 
-            _CSPWebResponse.ContentType := 'application/json';
+            THorseHackResponse(Res).GetWebResponse.ContentType := 'application/json';
 
             if global_config.paginateOnHeaders then
             begin
@@ -92,7 +92,7 @@ begin
               Res.RawWebResponse.SetCustomHeader(global_config.header.offset,_CSPOffset.ToString);
               Res.RawWebResponse.SetCustomHeader(global_config.header.size,_CSPNewJsonArray.Count.ToString);
 
-              _CSPWebResponse.Content := _CSPNewJsonArray.ToJSON;
+              THorseHackResponse(Res).GetWebResponse.Content := _CSPNewJsonArray.ToJSON;
 
               Res.Send( _CSPNewJsonArray );
 
@@ -109,7 +109,7 @@ begin
               _CSPResponse.AddPair(global_config.body.size, TJSONNumber.Create(_CSPNewJsonArray.Count));
               _CSPResponse.AddPair(global_config.body.data, _CSPNewJsonArray);
 
-              _CSPWebResponse.Content := _CSPResponse.ToJSON;
+              THorseHackResponse(Res).GetWebResponse.Content := _CSPResponse.ToJSON;
 
               Res.Send( _CSPResponse );
 

@@ -26,13 +26,15 @@ package HorseCSResponsePagination;
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
 {$IMPLICITBUILD ON}
+{$DENYPACKAGEUNIT OFF}
 
 requires
   rtl;
 
 contains
   Horse.CSResponsePagination.Middleware in 'src\Horse.CSResponsePagination.Middleware.pas',
-  Horse.CSResponsePagination in 'src\Horse.CSResponsePagination.pas';
+  Horse.CSResponsePagination in 'src\Horse.CSResponsePagination.pas',
+  Horse.CSResponsePagination.Types in 'src\Horse.CSResponsePagination.Types.pas';
 
 end.
 
