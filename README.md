@@ -195,7 +195,7 @@ begin
   PaginationConfig.body.size := 'size';
   PaginationConfig.body.data := 'data';
   
-  // ou
+  // or
 
   PaginationConfig.paginateOnHeaders := True;
   PaginationConfig.header.count := 'X-Total-Count';
