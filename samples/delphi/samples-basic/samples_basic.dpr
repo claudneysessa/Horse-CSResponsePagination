@@ -4,17 +4,16 @@ program samples_basic;
 {$R *.res}
 
 uses
-
   Horse,
   Horse.compression,
-  Horse.CSResponsePagination,
   Horse.Jhonson,
-
   System.JSON,
   System.SysUtils,
-
   DataSet.Serialize,
-  DBClient;
+  DBClient,
+  Horse.CSResponsePagination.Types in '..\..\..\src\Horse.CSResponsePagination.Types.pas',
+  Horse.CSResponsePagination.Middleware in '..\..\..\src\Horse.CSResponsePagination.Middleware.pas',
+  Horse.CSResponsePagination in '..\..\..\src\Horse.CSResponsePagination.pas';
 
 begin
 
@@ -23,7 +22,7 @@ begin
     .Use(CSResponsePagination(false))
     .Use(Jhonson);
 
-  THorse.Get('/testeCSPagination',
+  THorse.Get('/teste',
     procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
     var
       LDataSet: TClientDataSet;
@@ -52,7 +51,7 @@ begin
 
     end);
 
-  THorse.Listen(8888);
+  THorse.Listen(9000);
 
 end.
 
