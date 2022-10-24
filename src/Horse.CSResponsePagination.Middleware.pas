@@ -36,7 +36,7 @@ begin
 
   finally
 
-    if ( THorseHackResponse(Res).GetContent is TJSONArray ) then
+    if (Res.Content is TJSONArray ) then
     begin
 
       if ( ( Req.Headers['limit'] <> '' ) or ( Req.Headers['offset'] <> '' ) ) then
@@ -55,7 +55,7 @@ begin
         end;
 
 //        _CSPWebResponse := THorseHackResponse(Res).GetWebResponse;
-        _CSPContent := THorseHackResponse(Res).GetContent;
+        _CSPContent := Res.Content;
 
         if Assigned(_CSPContent) and _CSPContent.InheritsFrom( TJSONValue ) then
         begin
@@ -81,7 +81,7 @@ begin
                 _CSPNewJsonArray.AddElement(_CSPOriginalJsonArray.Items[_CSPInternalCount].Clone as TJSONValue);
             end;
 
-            THorseHackResponse(Res).GetWebResponse.ContentType := 'application/json';
+            Res.RawWebResponse.ContentType := 'application/json';
 
             if global_config.paginateOnHeaders then
             begin
@@ -92,7 +92,7 @@ begin
               Res.RawWebResponse.SetCustomHeader(global_config.header.offset,_CSPOffset.ToString);
               Res.RawWebResponse.SetCustomHeader(global_config.header.size,_CSPNewJsonArray.Count.ToString);
 
-              THorseHackResponse(Res).GetWebResponse.Content := _CSPNewJsonArray.ToJSON;
+              Res.RawWebResponse.Content := _CSPNewJsonArray.ToJSON;
 
               Res.Send( _CSPNewJsonArray );
 
@@ -109,7 +109,7 @@ begin
               _CSPResponse.AddPair(global_config.body.size, TJSONNumber.Create(_CSPNewJsonArray.Count));
               _CSPResponse.AddPair(global_config.body.data, _CSPNewJsonArray);
 
-              THorseHackResponse(Res).GetWebResponse.Content := _CSPResponse.ToJSON;
+              Res.RawWebResponse.Content := _CSPResponse.ToJSON;
 
               Res.Send( _CSPResponse );
 
